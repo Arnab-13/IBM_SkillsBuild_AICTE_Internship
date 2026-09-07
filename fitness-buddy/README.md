@@ -17,6 +17,7 @@
 9. [Architecture](#architecture)
 10. [Troubleshooting](#troubleshooting)
 11. [Disclaimer](#disclaimer)
+12. [Author & Acknowledgments](#Author--&--Acknowledgments)
 
 ---
 
@@ -242,44 +243,6 @@ http://localhost:8000
 | `GET` | `/api/motivation` | Get daily motivational quote + tip |
 | `GET` | `/docs` | Swagger UI (auto-generated) |
 
-### Example request bodies
-
-**POST /api/chat**
-```json
-{
-  "message": "Give me a 20 minute home workout",
-  "profile": {
-    "name": "Alex",
-    "fitness_goal": "weight loss",
-    "experience_level": "beginner",
-    "workout_duration_minutes": 20,
-    "equipment": "none"
-  }
-}
-```
-
-**POST /api/workout**
-```json
-{
-  "profile": {
-    "fitness_goal": "muscle gain",
-    "experience_level": "intermediate",
-    "workout_duration_minutes": 45,
-    "equipment": "dumbbells"
-  }
-}
-```
-
-**POST /api/nutrition**
-```json
-{
-  "meal_type": "dinner",
-  "profile": {
-    "dietary_preference": "vegetarian"
-  }
-}
-```
-
 ---
 
 ## Architecture
@@ -348,3 +311,12 @@ Vanilla JavaScript renders UI
 **Fitness Buddy provides general wellness information only.**
 
 It is **not** a substitute for professional medical advice, diagnosis, or treatment. Do not use Fitness Buddy to diagnose or treat any medical condition. For injuries, medical conditions, pregnancy, or any health concerns, consult a qualified healthcare professional before starting any new exercise or nutrition program.
+
+---
+
+## 👤 Author & Acknowledgments
+
+- **Intern / Author:** Arnab Chowdhury.
+- **Internship Program:**  IBM SKILLSBUILD FOR UNIVERSITY ENGAGEMENTS ON AI & IBM CLOUD
+- **Organized By:** IBM Skills Build
+- **In Collaboration With:** Edunet Foundation & AICTE (All India Council for Technical Education)
