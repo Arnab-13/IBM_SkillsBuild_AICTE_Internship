@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile – Fitness Buddy</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">💪 <span>Fitness Buddy</span></div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/profile">Profile</a>
+      <a href="/dashboard">Dashboard</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page header -->
+<div style="background:var(--surface);border-bottom:1px solid var(--border);padding:1.5rem 0">
+  <div class="container">
+    <h1 style="font-size:1.5rem">👤 My Profile</h1>
+    <p class="text-muted" style="margin:0">Tell us about yourself so we can personalise your experience.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="max-width:600px;margin:0 auto">
+
+      <!-- Success alert (hidden by default) -->
+      <div id="profile-success" class="alert alert-success hidden">
+        ✅ Profile saved! <a href="/dashboard">Go to your dashboard →</a>
+      </div>
+      <div id="profile-error" class="alert alert-error hidden"></div>
+
+      <div class="card">
+        <form id="profile-form" novalidate>
+
+          <!-- Name & Age -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your name / nickname</label>
+              <input type="text" id="name" name="name" placeholder="e.g. Alex" maxlength="50" />
+            </div>
+            <div class="form-group">
+              <label for="age">Age (optional)</label>
+              <input type="number" id="age" name="age" placeholder="e.g. 28" min="10" max="120" />
+            </div>
+          </div>
+
+          <!-- Fitness goal -->
+          <div class="form-group">
+            <label for="fitness_goal">Primary fitness goal</label>
+            <select id="fitness_goal" name="fitness_goal">
+              <option value="general fitness">General fitness</option>
+              <option value="weight loss">Weight loss</option>
+              <option value="muscle gain">Muscle gain</option>
+              <option value="endurance">Endurance / cardio</option>
+              <option value="flexibility">Flexibility &amp; mobility</option>
+              <option value="stress relief">Stress relief</option>
+            </select>
+          </div>
+
+          <!-- Experience & Activity -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="experience_level">Experience level</label>
+              <select id="experience_level" name="experience_level">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="activity_level">Daily activity level</label>
+              <select id="activity_level" name="activity_level">
+                <option value="sedentary">Sedentary (desk job)</option>
+                <option value="light">Lightly active</option>
+                <option value="moderate">Moderately active</option>
+                <option value="active">Very active</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Duration & Equipment -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="workout_duration_minutes">Workout time (minutes)</label>
+              <select id="workout_duration_minutes" name="workout_duration_minutes">
+                <option value="15">15 min</option>
+                <option value="20">20 min</option>
+                <option value="30" selected>30 min</option>
+                <option value="45">45 min</option>
+                <option value="60">60 min</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="equipment">Available equipment</label>
+              <select id="equipment" name="equipment">
+                <option value="none">No equipment (bodyweight)</option>
+                <option value="dumbbells">Dumbbells</option>
+                <option value="resistance bands">Resistance bands</option>
+                <option value="gym">Full gym access</option>
+                <option value="dumbbells and bands">Dumbbells + bands</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dietary preference -->
+          <div class="form-group">
+            <label for="dietary_preference">Dietary preference</label>
+            <select id="dietary_preference" name="dietary_preference">
+              <option value="balanced">Balanced / no restriction</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="keto">Keto / low carb</option>
+              <option value="high-protein">High protein</option>
+              <option value="gluten-free">Gluten-free</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="save-btn">
+            💾 Save Profile &amp; Go to Dashboard
+          </button>
+        </form>
+      </div>
+
+      <div class="disclaimer mt-2">
+        <strong>⚠️ Disclaimer:</strong> Fitness Buddy provides general wellness information only.
+        It is not a substitute for professional medical advice. Consult your healthcare provider
+        before starting any new exercise or nutrition plan.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">Fitness Buddy · General wellness information only — not medical advice.</div>
+</footer>
+
+<script src="/js/api.js"></script>
+<script src="/js/profile.js"></script>
+<script src="/js/app.js"></script>
+<script>
+(function initProfilePage() {
+  // Pre-fill form from saved profile
+  const saved = Profile.get();
+  const fields = ["name","age","fitness_goal","experience_level","activity_level",
+                  "workout_duration_minutes","equipment","dietary_preference"];
+  fields.forEach(f => {
+    const el = document.getElementById(f);
+    if (el && saved[f] !== null && saved[f] !== undefined && saved[f] !== "") {
+      el.value = saved[f];
+    }
+  });
+
+  // Save handler
+  document.getElementById("profile-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById("save-btn");
+    const successEl = document.getElementById("profile-success");
+    const errorEl   = document.getElementById("profile-error");
+    successEl.classList.add("hidden");
+    errorEl.classList.add("hidden");
+
+    const data = {};
+    fields.forEach(f => {
+      const el = document.getElementById(f);
+      if (!el) return;
+      const v = el.value.trim();
+      if (f === "age") data[f] = v ? parseInt(v, 10) : null;
+      else if (f === "workout_duration_minutes") data[f] = parseInt(v, 10);
+      else data[f] = v;
+    });
+
+    btn.disabled = true;
+    btn.textContent = "Saving…";
+
+    try {
+      const saved = await API.saveProfile(data);
+      Profile.save(saved);
+      successEl.classList.remove("hidden");
+      btn.textContent = "✅ Saved!";
+      setTimeout(() => { window.location.href = "/dashboard"; }, 1200);
+    } catch (err) {
+      errorEl.textContent = "Could not save profile: " + err.message;
+      errorEl.classList.remove("hidden");
+      btn.disabled = false;
+      btn.textContent = "💾 Save Profile & Go to Dashboard";
+    }
+  });
+})();
+</script>
+</body>
+</html>

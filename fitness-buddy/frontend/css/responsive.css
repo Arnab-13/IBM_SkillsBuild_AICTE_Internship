@@ -1,0 +1,47 @@
+/* =========================================================
+   Fitness Buddy – Responsive Overrides
+   ========================================================= */
+
+/* --- Tablet (≤768px) --- */
+@media (max-width: 768px) {
+  :root { font-size: 14px; }
+
+  .navbar .container { padding: 0 1rem; }
+  .nav-links a { padding: .4rem .6rem; font-size: .85rem; }
+
+  .hero { padding: 2.5rem 0 2rem; }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .chat-container { height: 360px; }
+
+  .card { padding: 1.1rem; }
+
+  .section { padding: 1.75rem 0; }
+}
+
+/* --- Mobile (≤480px) --- */
+@media (max-width: 480px) {
+  .nav-brand span { display: none; }
+
+  .btn { padding: .55rem 1rem; font-size: .88rem; }
+
+  .chat-messages { padding: .75rem; }
+  .chat-msg { max-width: 90%; }
+
+  .grid-2,
+  .grid-3 { grid-template-columns: 1fr; }
+
+  .tabs { gap: .3rem; }
+  .tab-btn { padding: .4rem .75rem; font-size: .82rem; }
+}
+
+/* --- Large screens (≥1200px) --- */
+@media (min-width: 1200px) {
+  .container { padding: 0 2rem; }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
